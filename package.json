@@ -1,0 +1,25 @@
+{
+	"name": "raphiel-reborn",
+	"version": "1.0.0",
+	"description": "Raphiel bot reborn.",
+	"main": "./build/index.js",
+	"repository": {
+		"url": "https://github.com/Singulariity/raphiel-reborn"
+	},
+	"scripts": {
+		"build": "rm -rf ./build/ && tsc",
+		"start": "node .",
+		"quick": "npm run build && npm run start",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Singulariity",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^20.11.5",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"discord.js": "^14.14.1",
+		"dotenv": "^16.3.1"
+	}
+}
