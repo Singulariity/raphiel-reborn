@@ -5,11 +5,24 @@ import {
 	SlashCommandBuilder,
 } from 'discord.js';
 
+export type CommandCategory =
+	| 'Core'
+	| 'Fun'
+	| 'Information'
+	| 'Moderation'
+	| 'Raphiel Reacts'
+	| 'NSFW'
+	| 'Special'
+	| 'Other'
+	| undefined;
+
 export type Command = {
 	data: SlashCommandBuilder;
 	options: {
 		name: string;
 		description: string;
+		category?: CommandCategory;
+		nsfw?: boolean;
 	};
 	execute: (interaction: CommandInteraction) => void;
 };

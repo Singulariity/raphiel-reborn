@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"discord.js": "^14.14.1",
-		"dotenv": "^16.3.1"
+		"dotenv": "^16.3.1",
+		"nekos-best.js": "^6.3.0"
 	}
 }

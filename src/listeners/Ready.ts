@@ -34,4 +34,4 @@ module.exports = {
 		}
 		activity();
 	},
-} as Listener<Events.ClientReady>;
+} satisfies Listener<Events.ClientReady>;

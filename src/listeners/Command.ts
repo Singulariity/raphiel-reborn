@@ -28,6 +28,15 @@ module.exports = {
 			return;
 		}
 
+		if (command.options.nsfw) {
+			interaction.reply({
+				content:
+					"This channel is not marked as **NSFW**. You can't use this command here.",
+				ephemeral: true,
+			});
+			return;
+		}
+
 		try {
 			command.execute(interaction);
 		} catch (error) {
@@ -45,4 +54,4 @@ module.exports = {
 			}
 		}
 	},
-} as Listener<Events.InteractionCreate>;
+} satisfies Listener<Events.InteractionCreate>;

@@ -42,7 +42,8 @@ async function main() {
 		if ('data' in command && 'execute' in command) {
 			command.data
 				.setName(command.options.name)
-				.setDescription(command.options.description);
+				.setDescription(command.options.description)
+				.setNSFW(command.options.nsfw);
 
 			commands.set(command.data.name, command);
 		} else {

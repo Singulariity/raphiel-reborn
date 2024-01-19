@@ -6,15 +6,16 @@ import {
 	SlashCommandBuilder,
 } from 'discord.js';
 
-import { Command } from '../types';
-import Color from '../utils/Colors';
-import Emote from '../utils/Emote';
+import { Command } from '../../types';
+import Color from '../../utils/Colors';
+import Emote from '../../utils/Emote';
 
 module.exports = {
 	data: new SlashCommandBuilder(),
 	options: {
 		name: 'vote',
 		description: 'Vote link for Raphiel',
+		category: 'Core',
 	},
 	async execute(interaction) {
 		const embed = new EmbedBuilder()
@@ -32,4 +33,4 @@ module.exports = {
 
 		await interaction.reply({ embeds: [embed], components: [row] });
 	},
-} as Command;
+} satisfies Command;
