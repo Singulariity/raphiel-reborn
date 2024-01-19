@@ -10,6 +10,14 @@ module.exports = {
 	async execute(interaction) {
 		if (!interaction.isChatInputCommand()) return;
 
+		if (!interaction.inGuild()) {
+			interaction.reply({
+				content: `Sorry! You cannot use commands in DMs. :(`,
+				ephemeral: true,
+			});
+			return;
+		}
+
 		let command = commands.get(interaction.commandName);
 
 		if (!command) {

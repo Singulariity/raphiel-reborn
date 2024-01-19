@@ -1,6 +1,5 @@
 import { Client, ClientEvents, Collection, REST, Routes } from 'discord.js';
 import { readdirSync } from 'fs';
-import { exit } from 'process';
 import path from 'path';
 import 'dotenv/config';
 
@@ -8,13 +7,13 @@ import { Command, Listener } from './types';
 import Logger from './utils/Logger';
 
 async function main() {
-	if (!process.env.TOKEN || !process.env.CLIENT_ID) {
-		Logger.error('.env variables not provided correctly!');
-		exit(1);
-	}
-
 	const client = new Client({
-		intents: ['GuildMembers', 'DirectMessages', 'GuildVoiceStates'],
+		intents: [
+			'GuildMembers',
+			'DirectMessages',
+			'GuildVoiceStates',
+			'GuildEmojisAndStickers',
+		],
 	});
 
 	global.commands = new Collection<string, Command>();
@@ -76,7 +75,7 @@ async function main() {
 	}
 
 	async function deployCommands() {
-		const rest = new REST().setToken(process.env.TOKEN!);
+		const rest = new REST().setToken(process.env.TOKEN);
 
 		try {
 			Logger.info(
@@ -84,7 +83,7 @@ async function main() {
 			);
 
 			const data = await rest.put(
-				Routes.applicationCommands(process.env.CLIENT_ID!),
+				Routes.applicationCommands(process.env.CLIENT_ID),
 				{
 					body: commands.map((command) => command.data.toJSON()),
 				}
