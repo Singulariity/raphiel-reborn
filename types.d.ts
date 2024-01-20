@@ -1,6 +1,7 @@
 import {
 	Awaitable,
 	ClientEvents,
+	Collection,
 	CommandInteraction,
 	SlashCommandBuilder,
 } from 'discord.js';
@@ -34,3 +35,9 @@ export type Listener<Event extends keyof ClientEvents = any> = {
 	};
 	execute: (...args: ClientEvents[Event]) => Awaitable<void>;
 };
+
+declare module 'discord.js' {
+	export interface Client {
+		commands: Collection<string, Command>;
+	}
+}

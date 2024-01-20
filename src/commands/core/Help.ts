@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { Command } from '../../types';
+import { Command } from '../../../types';
 
 module.exports = {
 	data: new SlashCommandBuilder().addStringOption((option) =>

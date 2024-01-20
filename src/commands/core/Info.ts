@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 
-import { Command } from '../../types';
+import { Command } from '../../../types';
 import { version } from '../../../package.json';
 import Color from '../../utils/Colors';
 

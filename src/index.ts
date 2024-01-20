@@ -3,20 +3,23 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import 'dotenv/config';
 
-import { Command, Listener } from './types';
+import { Command, Listener } from '../types';
 import Logger from './utils/Logger';
 
 async function main() {
 	const client = new Client({
 		intents: [
+			'Guilds',
 			'GuildMembers',
+			'GuildModeration',
+			'GuildMessageReactions',
 			'DirectMessages',
 			'GuildVoiceStates',
 			'GuildEmojisAndStickers',
 		],
 	});
 
-	global.commands = new Collection<string, Command>();
+	client.commands = new Collection<string, Command>();
 	const listeners = new Collection<string, Listener<keyof ClientEvents>[]>();
 
 	const getFiles = (dir: string) => {
@@ -45,7 +48,7 @@ async function main() {
 				.setDescription(command.options.description)
 				.setNSFW(command.options.nsfw);
 
-			commands.set(command.data.name, command);
+			client.commands.set(command.data.name, command);
 		} else {
 			Logger.warning(
 				`The command at "${path}" is missing a required "data" or "execute" property!`
@@ -80,13 +83,15 @@ async function main() {
 
 		try {
 			Logger.info(
-				`Updating ${commands.size} application (/) commands...`
+				`Updating ${client.commands.size} application (/) commands...`
 			);
 
 			const data = await rest.put(
 				Routes.applicationCommands(process.env.CLIENT_ID),
 				{
-					body: commands.map((command) => command.data.toJSON()),
+					body: client.commands.map((command) =>
+						command.data.toJSON()
+					),
 				}
 			);
 

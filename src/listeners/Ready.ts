@@ -1,6 +1,6 @@
 import { ActivityType, Events } from 'discord.js';
 
-import { Listener } from '../types';
+import { Listener } from '../../types';
 import { version } from '../../package.json';
 import Logger from '../utils/Logger';
 
