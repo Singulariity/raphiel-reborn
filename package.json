@@ -1,6 +1,6 @@
 {
 	"name": "raphiel-reborn",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Raphiel bot reborn.",
 	"main": "./build/index.js",
 	"repository": {
@@ -12,6 +12,7 @@
 	"scripts": {
 		"build": "rm -rf ./build/ && tsc",
 		"start": "set NODE_ENV=production && node .",
+		"predev": "npm run build",
 		"dev": "set NODE_ENV=development && node ."
 	},
 	"author": "Singulariity",

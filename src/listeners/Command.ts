@@ -1,6 +1,7 @@
 import { Events } from 'discord.js';
 
 import { Listener } from '../../types';
+import Logger from '../utils/Logger';
 
 module.exports = {
 	event: Events.InteractionCreate,
@@ -9,14 +10,6 @@ module.exports = {
 	},
 	async execute(interaction) {
 		if (!interaction.isChatInputCommand()) return;
-
-		if (!interaction.inGuild()) {
-			interaction.reply({
-				content: `Sorry! You cannot use commands in DMs. :(`,
-				ephemeral: true,
-			});
-			return;
-		}
 
 		let command = interaction.client.commands.get(interaction.commandName);
 
@@ -27,6 +20,18 @@ module.exports = {
 			});
 			return;
 		}
+
+		if (!interaction.inGuild()) {
+			interaction.reply({
+				content: `Sorry! You cannot use commands in DMs. :(`,
+				ephemeral: true,
+			});
+			return;
+		}
+
+		Logger.info(
+			`User ${interaction.user.username} used command '${command.data.name}'`
+		);
 
 		if (command.options.nsfw) {
 			interaction.reply({

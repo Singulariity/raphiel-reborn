@@ -1,28 +1,37 @@
-class Logger {
-	private static colored(message: string, color: ConsoleColor) {
-		return color + message + ConsoleColor.RESET;
-	}
+import { Client, MessageCreateOptions, MessagePayload } from 'discord.js';
 
+import Config from '../config';
+
+class Logger {
 	public static warning(message: string) {
-		console.log(
-			this.colored('[WARNING] ', ConsoleColor.YELLOW_FG) +
-				this.colored(message, ConsoleColor.GRAY_FG)
-		);
+		console.log(colored('[WARNING] ', ConsoleColor.YELLOW_FG) + message);
 	}
 
 	public static info(message: string) {
-		console.log(
-			this.colored('[INFO] ', ConsoleColor.BLUE_FG) +
-				this.colored(message, ConsoleColor.GRAY_FG)
-		);
+		console.log(colored('[INFO] ', ConsoleColor.BLUE_FG) + message);
 	}
 
 	public static error(message: string) {
-		console.log(
-			this.colored('[ERROR] ', ConsoleColor.RED_FG) +
-				this.colored(message, ConsoleColor.GRAY_FG)
-		);
+		console.log(colored('[ERROR] ', ConsoleColor.RED_FG) + message);
 	}
+
+	public static async log(
+		client: Client,
+		message: string | MessagePayload | MessageCreateOptions
+	) {
+		const channel = await client.channels.fetch(Config.LOG_CHANNEL_ID);
+
+		if (!channel || !channel.isTextBased()) {
+			this.error('LOG CHANNEL NOT FOUND!');
+			return;
+		}
+
+		return await channel.send(message);
+	}
+}
+
+function colored(message: string, color: ConsoleColor) {
+	return color + message + ConsoleColor.RESET;
 }
 
 enum ConsoleColor {
