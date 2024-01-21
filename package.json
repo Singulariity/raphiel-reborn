@@ -6,11 +6,12 @@
 	"repository": {
 		"url": "https://github.com/Singulariity/raphiel-reborn"
 	},
+	"engines": {
+		"node": "20.x"
+	},
 	"scripts": {
 		"build": "rm -rf ./build/ && tsc",
-		"prestart": "npm run build",
 		"start": "set NODE_ENV=production && node .",
-		"predev": "npm run build",
 		"dev": "set NODE_ENV=development && node ."
 	},
 	"author": "Singulariity",
