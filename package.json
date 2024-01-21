@@ -8,9 +8,10 @@
 	},
 	"scripts": {
 		"build": "rm -rf ./build/ && tsc",
-		"start": "node .",
-		"quick": "npm run build && npm run start",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"prestart": "npm run build",
+		"start": "set NODE_ENV=production && node .",
+		"predev": "npm run build",
+		"dev": "set NODE_ENV=development && node ."
 	},
 	"author": "Singulariity",
 	"license": "MIT",

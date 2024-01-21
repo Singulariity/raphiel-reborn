@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 import { Command, Listener } from '../types';
 import Logger from './utils/Logger';
+import Config from './config';
 
 async function main() {
 	const client = new Client({
@@ -87,7 +88,7 @@ async function main() {
 			);
 
 			const data = await rest.put(
-				Routes.applicationCommands(process.env.CLIENT_ID),
+				Routes.applicationCommands(Config.BOT_CLIENT_ID),
 				{
 					body: client.commands.map((command) =>
 						command.data.toJSON()
