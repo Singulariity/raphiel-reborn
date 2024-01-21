@@ -7,11 +7,14 @@ import ImageCommandHandler, {
 
 module.exports = {
 	data: new SlashCommandBuilder().addUserOption((option) =>
-		option.setName('user').setDescription('Who is baka?').setRequired(true)
+		option
+			.setName('user')
+			.setDescription('Who do you want to tickle?')
+			.setRequired(true)
 	) as SlashCommandBuilder,
 	options: {
-		name: 'baka',
-		description: 'Call someone a b-baka!',
+		name: 'tickle',
+		description: 'Tickle someone',
 		category: 'Fun',
 	},
 	async execute(interaction) {
@@ -19,9 +22,9 @@ module.exports = {
 			interaction,
 			option: 'user',
 			self_message: 'But... why? ;-;',
-			bot_message: "How could you :'(",
-			embed_message: '**%1** called **%2** a baka.',
-			type: 'baka',
+			bot_message: '*giggles* 🩷',
+			embed_message: '**%2**, you tickled by **%1**.',
+			type: 'tickle',
 		};
 		return await ImageCommandHandler(options);
 	},

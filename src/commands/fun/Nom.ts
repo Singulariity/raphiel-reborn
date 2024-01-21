@@ -7,21 +7,24 @@ import ImageCommandHandler, {
 
 module.exports = {
 	data: new SlashCommandBuilder().addUserOption((option) =>
-		option.setName('user').setDescription('Who is baka?').setRequired(true)
+		option
+			.setName('user')
+			.setDescription('Who do you want to nom?')
+			.setRequired(true)
 	) as SlashCommandBuilder,
 	options: {
-		name: 'baka',
-		description: 'Call someone a b-baka!',
+		name: 'nom',
+		description: 'Eat someone',
 		category: 'Fun',
 	},
 	async execute(interaction) {
 		let options: ImageCommandHandlerProps = {
 			interaction,
 			option: 'user',
-			self_message: 'But... why? ;-;',
-			bot_message: "How could you :'(",
-			embed_message: '**%1** called **%2** a baka.',
-			type: 'baka',
+			self_message: 'Sorry to see you alone...',
+			bot_message: '*Noms **%1** back* 🩷',
+			embed_message: '**%2**, you got a nom from **%1**.',
+			type: 'nom',
 		};
 		return await ImageCommandHandler(options);
 	},
